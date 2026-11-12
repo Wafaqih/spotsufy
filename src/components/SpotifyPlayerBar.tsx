@@ -80,10 +80,10 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
   const trackInfo = getTrackDisplayName(activeAudioTrack);
 
   return (
-    <footer className="h-20 bg-[#141414] border-t border-white/10 px-4 md:px-6 flex items-center justify-between select-none z-40 shrink-0">
+    <footer className="min-h-16 lg:h-20 bg-[#141414] border-t border-white/10 px-3 md:px-6 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:py-0 flex flex-wrap lg:flex-nowrap items-center justify-between gap-x-3 gap-y-1.5 select-none z-40 shrink-0">
       {/* Left: Current Slide Info & Album Icon */}
-      <div className="flex items-center gap-3 w-1/4 min-w-[200px]">
-        <div className="relative w-12 h-12 rounded-lg bg-black border border-white/10 overflow-hidden flex items-center justify-center shrink-0 shadow-md">
+      <div className="flex items-center gap-2.5 flex-1 min-w-0 lg:flex-none lg:w-1/4 lg:min-w-[200px]">
+        <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-black border border-white/10 overflow-hidden flex items-center justify-center shrink-0 shadow-md">
           <div className="absolute inset-0 bg-gradient-to-tr from-[#1DB954]/25 to-black" />
           <Disc 
             className={`w-6 h-6 text-[#1DB954] relative z-10 ${isPlayingAudio ? 'animate-spin' : ''}`} 
@@ -93,7 +93,7 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
 
         <div className="min-w-0 pr-2">
           <div className="flex items-center gap-1.5">
-            <span className="text-[10px] font-mono font-bold text-[#1DB954] bg-[#1DB954]/10 px-1.5 py-0.2 rounded border border-[#1DB954]/20">
+            <span className="text-[10px] font-mono font-bold text-[#1DB954] bg-[#1DB954]/10 px-1.5 py-0.2 rounded border border-[#1DB954]/20 whitespace-nowrap shrink-0">
               Slide {currentSlide.trackNumber}
             </span>
             <h4 className="text-xs font-bold text-white truncate">
@@ -125,8 +125,8 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
       </div>
 
       {/* Center: Single, Dedicated Slide Navigation & Progress Bar */}
-      <div className="flex flex-col items-center gap-1.5 w-2/4 max-w-xl">
-        <div className="flex items-center gap-4">
+      <div className="flex flex-col items-center gap-1.5 shrink-0 lg:w-2/4 lg:max-w-xl">
+        <div className="flex items-center gap-2 sm:gap-4">
           {/* Previous Slide Button */}
           <button
             onClick={onPrevSlide}
@@ -162,7 +162,7 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
         </div>
 
         {/* 5-Slide Step Navigator (Pristine, Proportional, No Clutter) */}
-        <div className="w-full flex items-center justify-center gap-2">
+        <div className="hidden lg:flex w-full items-center justify-center gap-2">
           <span className="text-[11px] font-mono text-[#A7A7A7] font-semibold">
             Slide {currentSlideIndex + 1} / {totalSlides}
           </span>
@@ -193,7 +193,7 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
       </div>
 
       {/* Right: Audio Volume, Academic References & Fullscreen Toggle */}
-      <div className="flex items-center justify-end gap-3 w-1/4 min-w-[200px]">
+      <div className="hidden lg:flex items-center justify-end gap-3 w-1/4 min-w-[200px]">
         {/* Ambient Contemplation Audio Toggle */}
         <div className="hidden sm:flex items-center gap-1.5">
           <button
@@ -251,6 +251,16 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
             <ChevronDown className="w-4 h-4" />
           </button>
         )}
+      </div>
+
+      {/* Progres slide ringkas untuk mobile/tablet */}
+      <div className="lg:hidden w-full flex items-center gap-2">
+        <span className="text-[10px] font-mono text-[#A7A7A7] shrink-0">
+          {currentSlideIndex + 1}/{totalSlides}
+        </span>
+        <div className="flex-1 h-1 rounded-full bg-white/15 overflow-hidden">
+          <div className="h-full bg-[#1DB954] transition-all" style={{ width: `${((currentSlideIndex + 1) / totalSlides) * 100}%` }} />
+        </div>
       </div>
     </footer>
   );

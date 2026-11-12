@@ -76,3 +76,16 @@ body {
     print-color-adjust: exact;
   }
 }
+
+/* Mode presentasi desktop: rem dikunci agar kanvas 1280x720 selalu proporsional di semua layar */
+html.is-stage-desktop,
+html.is-stage-desktop.is-fullscreen {
+  font-size: 16px;
+}
+
+/* Mobile/tablet: halaman boleh di-scroll vertikal, tanpa geser horizontal */
+@media (max-width: 1023px) {
+  html {
+    font-size: 15px;
+  }
+}
