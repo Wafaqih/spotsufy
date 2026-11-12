@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  ChevronLeft, ChevronRight, Volume2, BookOpen, Layers
+  ChevronLeft, ChevronRight, Volume2, BookOpen, Layers, X
 } from 'lucide-react';
 import { SlideData } from '../types/presentation';
 import spotsufyLogo from '../assets/images/logo_spotsufy.png';
@@ -14,6 +14,8 @@ interface SpotifySidebarProps {
   onToggleCollapse: () => void;
   onGoHome: () => void;
   onOpenMusicLibrary?: () => void;
+  /** Mode drawer (mobile): selalu terbuka penuh, tombol collapse jadi tombol tutup */
+  isDrawer?: boolean;
 }
 
 export const SpotifySidebar: React.FC<SpotifySidebarProps> = ({
@@ -23,12 +25,13 @@ export const SpotifySidebar: React.FC<SpotifySidebarProps> = ({
   isPlayingAudio,
   isCollapsed,
   onToggleCollapse,
-  onGoHome
+  onGoHome,
+  isDrawer = false
 }) => {
   return (
     <aside 
-      className={`h-full bg-black flex flex-col border-r border-white/10 transition-all duration-300 select-none z-30 shrink-0 ${
-        isCollapsed ? 'w-16' : 'w-72 lg:w-80'
+      className={`h-full bg-black flex flex-col border-r border-white/10 select-none z-30 shrink-0 ${
+        isDrawer ? 'w-full' : `transition-all duration-300 ${isCollapsed ? 'w-16' : 'w-72 lg:w-80'}`
       }`}
     >
       {/* Brand Header */}
@@ -72,7 +75,7 @@ export const SpotifySidebar: React.FC<SpotifySidebarProps> = ({
           className="p-1 rounded-md text-white/50 hover:text-white hover:bg-white/10 transition-colors"
           title={isCollapsed ? "Buka Daftar Slide" : "Persempit Sidebar"}
         >
-          {isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
+          {isDrawer ? <X className="w-5 h-5" /> : isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
       </div>
 

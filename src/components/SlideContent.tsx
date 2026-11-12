@@ -45,7 +45,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 1) {
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header Title Section */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -73,7 +73,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
             </div>
 
             {/* Dua Tokoh & Karakteristik Kajian */}
-            <div className="grid grid-cols-2 gap-3.5 pt-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 pt-1">
               {/* Tokoh 1: Imam Al-Ghazali */}
               <div className="p-3.5 rounded-xl bg-[#181818] border border-amber-500/25 flex flex-col justify-between space-y-2">
                 <div className="flex items-center justify-between">
@@ -138,9 +138,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer Academic Footnote */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Sumber Primer: Iḥyā’ ‘Ulūm al-Dīn & Kitāb al-Mūsīqā al-Kabīr</span>
-          <span className="font-mono text-white/30">Slide 01</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 01</span>
         </div>
       </div>
     );
@@ -192,7 +192,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     const currentElem = elementsData.find(e => e.id === activeElementS2) || elementsData[0];
 
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -212,7 +212,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
             <span className="text-[#1DB954]">Klik tahapan untuk menelaah detail</span>
           </div>
 
-          <div className="grid grid-cols-4 gap-3 relative">
+          <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 relative">
             {elementsData.map((elem, idx) => {
               const isActive = activeElementS2 === elem.id;
               return (
@@ -316,7 +316,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Formula Inti: Samā‘ (Pintu Masuk) ➔ Qalb (Tempat Respons) ➔ Wajd (Pengalaman Batin) ➔ Pembinaan Jiwa</span>
           <span className="text-[#1DB954] font-semibold">{slide.mainMessage}</span>
         </div>
@@ -329,7 +329,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 3) {
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -497,7 +497,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Perbandingan Metodologis Objektif</span>
           <span className="text-amber-400 font-semibold">{slide.mainMessage}</span>
         </div>
@@ -510,7 +510,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 4) {
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -615,7 +615,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Teks Arab Asli Bersumber dari Iḥyā’ ‘Ulūm al-Dīn</span>
           <span className="text-[#1DB954] font-semibold">{slide.mainMessage}</span>
         </div>
@@ -666,7 +666,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -721,7 +721,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* 4 Spheres of Influence (Clean 4-column horizontal cards) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 shrink-0 my-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 shrink-0 my-1">
           {influenceCategories.map((cat) => (
             <div 
               key={cat.id} 
@@ -752,7 +752,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kutipan Sahih: Iḥyā’ ‘Ulūm al-Dīn (Bab Ādāb al-Samā‘ wa al-Wajd)</span>
           <span className="text-[#1DB954] font-semibold">{slide.mainMessage}</span>
         </div>
@@ -765,7 +765,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 6) {
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -870,9 +870,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Kajian Konseptual Samā‘iy Imam Al-Ghazali</span>
-          <span className="font-mono text-white/30">Slide 06</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 06</span>
         </div>
       </div>
     );
@@ -883,7 +883,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 7) {
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -981,9 +981,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Rumusan Alur: Samā‘ ➔ Fahmun (Kognisi) ➔ Wajdun (Afeksi) ➔ Harakātun (Konasi)</span>
-          <span className="font-mono text-white/30">Slide 07</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 07</span>
         </div>
       </div>
     );
@@ -994,7 +994,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 8) {
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -1086,9 +1086,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kajian Konseptual: Pembinaan Jiwa Berlandaskan Pemikiran Al-Ghazali</span>
-          <span className="font-mono text-white/30">Slide 08</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 08</span>
         </div>
       </div>
     );
@@ -1099,7 +1099,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
   // ---------------------------------------------------------------------------
   if (slide.id === 9) {
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -1116,7 +1116,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         <div className="grid grid-cols-12 gap-4 my-auto items-stretch py-1 flex-1 min-h-0">
           {/* Left Column: 3 Ilustrasi Simbolik & Refleksi Akademik */}
           <div className="col-span-12 lg:col-span-7 flex flex-col justify-between space-y-2.5">
-            <div className="grid grid-cols-3 gap-2.5">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
               {/* 1. Semilir Angin */}
               <div className="p-3 rounded-xl bg-[#181818] border border-cyan-500/20 space-y-1">
                 <div className="flex items-center gap-1.5 text-cyan-300 font-bold text-xs">
@@ -1189,9 +1189,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kepekaan Batin sebagai Unsur Kunci Pengalaman Samā‘iy</span>
-          <span className="font-mono text-white/30">Slide 09</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 09</span>
         </div>
       </div>
     );
@@ -1241,7 +1241,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -1264,28 +1264,28 @@ export const SlideContent: React.FC<SlideContentProps> = ({
             {mustamiLevels.map((lvl) => (
               <div 
                 key={lvl.level}
-                className={`p-3 md:p-3.5 rounded-xl border flex items-center justify-between gap-3 transition-colors ${lvl.color}`}
+                className={`p-3 md:p-3.5 rounded-xl border flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 lg:gap-3 transition-colors ${lvl.color}`}
               >
                 <div className="flex items-center gap-3 min-w-0">
                   <span className="w-7 h-7 rounded-lg bg-black/60 border border-white/10 flex items-center justify-center font-mono font-black text-xs shrink-0">
                     {lvl.level}
                   </span>
                   <div className="min-w-0">
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-xs md:text-sm font-bold text-white truncate">
+                    <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                      <h4 className="text-xs md:text-sm font-bold text-white lg:truncate">
                         {lvl.title}
                       </h4>
                       <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/10 border border-white/10 shrink-0 hidden sm:inline">
                         {lvl.badge}
                       </span>
                     </div>
-                    <p className="text-[11px] text-[#D1D5DB] line-clamp-1 mt-0.5">
+                    <p className="text-[11px] text-[#D1D5DB] lg:line-clamp-1 mt-0.5">
                       {lvl.desc}
                     </p>
                   </div>
                 </div>
 
-                <span className="text-sm md:text-base font-arabic text-amber-300 shrink-0" dir="rtl" lang="ar">
+                <span className="text-sm md:text-base font-arabic text-amber-300 shrink-0 self-end lg:self-auto" dir="rtl" lang="ar">
                   {lvl.arabic}
                 </span>
               </div>
@@ -1322,9 +1322,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Klasifikasi Mustami‘ Berdasarkan Kesiapan Ruhani</span>
-          <span className="font-mono text-white/30">Slide 10</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 10</span>
         </div>
       </div>
     );
@@ -1343,7 +1343,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -1437,9 +1437,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kajian Batiniah Tasawuf Imam Al-Ghazali</span>
-          <span className="font-mono text-white/30">Slide 11</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 11</span>
         </div>
       </div>
     );
@@ -1458,7 +1458,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -1552,9 +1552,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kajian Teori Musik & Akustik Islam Klasik</span>
-          <span className="font-mono text-white/30">Slide 12</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 12</span>
         </div>
       </div>
     );
@@ -1573,7 +1573,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-4 md:p-5 lg:p-6 flex flex-col justify-between overflow-hidden select-none">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-4 md:p-5 lg:p-6 flex flex-col gap-4 lg:gap-0 lg:justify-between select-none">
         {/* Header */}
         <div className="border-b border-white/10 pb-2.5 flex items-start justify-between shrink-0">
           <div>
@@ -1667,9 +1667,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40 shrink-0">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40 shrink-0">
           <span>Kajian Hubungan Karakter Komposisi dan Respons Jiwa</span>
-          <span className="font-mono text-white/30">Slide 13</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 13</span>
         </div>
       </div>
     );
@@ -1723,7 +1723,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -1738,7 +1738,26 @@ export const SlideContent: React.FC<SlideContentProps> = ({
 
         {/* 8-Aspect Comparison Table */}
         <div className="my-auto py-1 flex-1 flex flex-col justify-center overflow-hidden">
-          <div className="overflow-x-auto rounded-xl border border-white/10 bg-[#181818]">
+          <div className="md:hidden space-y-3">
+            {tableData.map((row) => (
+              <div key={row.aspek} className="rounded-xl border border-white/10 bg-[#181818] overflow-hidden">
+                <div className="px-3 py-2 bg-black/50 border-b border-white/10 text-xs font-bold text-white">
+                  {row.aspek}
+                </div>
+                <div className="p-3 space-y-2.5">
+                  <div className="border-l-2 border-amber-400/70 pl-2.5">
+                    <span className="block text-[11px] font-bold text-amber-300 mb-0.5">Imam Al-Ghazali</span>
+                    <p className="text-xs leading-relaxed text-amber-100/90">{row.ghazali}</p>
+                  </div>
+                  <div className="border-l-2 border-cyan-400/70 pl-2.5">
+                    <span className="block text-[11px] font-bold text-cyan-300 mb-0.5">Al-Farabi</span>
+                    <p className="text-xs leading-relaxed text-cyan-100/90">{row.farabi}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="hidden md:block overflow-x-auto rounded-xl border border-white/10 bg-[#181818]">
             <table className="w-full text-left border-collapse">
               <thead>
                 <tr className="border-b border-white/10 bg-black/50 text-[11px] md:text-xs">
@@ -1780,9 +1799,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Studi Komparatif Dua Kutub Pemikiran Islam Klasik</span>
-          <span className="font-mono text-white/30">Slide 14</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 14</span>
         </div>
       </div>
     );
@@ -1801,7 +1820,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -1896,9 +1915,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Sintesis Konvergensi Gagasan Islam Klasik</span>
-          <span className="font-mono text-white/30">Slide 15</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 15</span>
         </div>
       </div>
     );
@@ -1942,7 +1961,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
     ];
 
     return (
-      <div className="w-full h-full p-6 md:p-8 flex flex-col justify-between overflow-hidden">
+      <div data-slide-root className="w-full min-h-full lg:h-full p-6 md:p-8 flex flex-col gap-4 lg:gap-0 lg:justify-between">
         {/* Header */}
         <div className="border-b border-white/10 pb-3 flex items-start justify-between">
           <div>
@@ -2001,9 +2020,9 @@ export const SlideContent: React.FC<SlideContentProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="pt-2 border-t border-white/5 flex items-center justify-between text-xs text-white/40">
+        <div className="pt-2 border-t border-white/5 flex flex-wrap items-center justify-between gap-x-3 gap-y-1 text-xs text-white/40">
           <span>Sintesis Aplikatif Pembinaan Jiwa Berbasis Terapi Samā‘iy</span>
-          <span className="font-mono text-white/30">Slide 16 (Penutup)</span>
+          <span className="font-mono text-white/30 whitespace-nowrap">Slide 16 (Penutup)</span>
         </div>
       </div>
     );

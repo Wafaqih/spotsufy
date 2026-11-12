@@ -8,6 +8,7 @@ import { AudioTrackType } from '../types/presentation';
 import { audioEngine } from '../utils/audioEngine';
 import { SLIDES_DATA } from '../data/slidesData';
 import spotsufyLogo from '../assets/images/logo_spotsufy.png';
+import heroImg from '../assets/images/ghazali_farabi_manuscript_1794465711425.jpg';
 import { GroupInfoModal } from './GroupInfoModal';
 import { ExportPdfModal } from './ExportPdfModal';
 
@@ -61,7 +62,7 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
   return (
     <div className="w-full h-full bg-[#121212] text-white flex select-none overflow-hidden font-sans">
       {/* ----------------- LEFT SIDEBAR ----------------- */}
-      <aside className="w-64 lg:w-72 bg-black flex flex-col justify-between p-6 border-r border-white/5 shrink-0">
+      <aside className="hidden lg:flex lg:w-72 bg-black flex-col justify-between p-6 border-r border-white/5 shrink-0">
         <div className="space-y-7">
           {/* Brand Logo: Spotsufy */}
           <div className="flex items-center gap-3">
@@ -135,9 +136,39 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
       </aside>
 
       {/* ----------------- MAIN STAGE ----------------- */}
-      <main className="flex-1 bg-gradient-to-b from-[#181818] via-[#121212] to-black p-6 md:p-10 flex flex-col justify-between overflow-hidden relative">
+      <main className="flex-1 min-w-0 bg-gradient-to-b from-[#181818] via-[#121212] to-black p-4 sm:p-6 lg:p-10 flex flex-col gap-6 lg:gap-4 lg:justify-between overflow-y-auto overflow-x-hidden relative">
+        {/* Navigasi ringkas untuk mobile/tablet (pengganti sidebar) */}
+        <div className="lg:hidden flex flex-col gap-3">
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 rounded-full overflow-hidden shadow-lg shadow-[#1DB954]/25 shrink-0 flex items-center justify-center bg-black">
+              <img src={spotsufyLogo} alt="Spotsufy Logo" className="w-full h-full object-cover" />
+            </div>
+            <span className="text-xl font-extrabold tracking-tight text-[#1DB954]">Spotsufy</span>
+          </div>
+          <div className="flex gap-2 overflow-x-auto pb-1">
+            <button
+              onClick={() => setSearchOpen(true)}
+              className="shrink-0 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-white/90 flex items-center gap-1.5"
+            >
+              <Search className="w-3.5 h-3.5" /> Cari
+            </button>
+            <button
+              onClick={onOpenReferences}
+              className="shrink-0 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-white/90 flex items-center gap-1.5"
+            >
+              <Library className="w-3.5 h-3.5" /> Daftar Pustaka
+            </button>
+            <button
+              onClick={onOpenLiked}
+              className="shrink-0 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-white/90 flex items-center gap-1.5"
+            >
+              <Heart className="w-3.5 h-3.5 fill-current text-purple-400" /> Liked Songs
+            </button>
+          </div>
+        </div>
+
         {/* Top Header Actions */}
-        <div className="flex items-center justify-between">
+        <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           <div className="text-xs font-semibold text-white/60">
             Kelompok 8 · Tasawuf Psikoterapi
           </div>
@@ -162,9 +193,9 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
         </div>
 
         {/* Center Hero Split: Left Info vs Right Album Art */}
-        <div className="grid grid-cols-12 gap-6 lg:gap-12 items-center flex-1 my-auto max-w-6xl mx-auto w-full">
+        <div className="grid grid-cols-12 gap-8 lg:gap-12 items-center lg:flex-1 lg:my-auto max-w-6xl mx-auto w-full">
           {/* Left Column: Title & Presentation Launch */}
-          <div className="col-span-7 flex flex-col justify-center space-y-6">
+          <div className="col-span-12 lg:col-span-7 flex flex-col justify-center space-y-5 lg:space-y-6">
             <span className="text-xs font-bold uppercase tracking-wider text-[#1DB954]">
               Kajian Pemikiran Islam Klasik · Tasawuf & Teori Musik
             </span>
@@ -184,7 +215,7 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
             <div className="pt-2">
               <button
                 onClick={onStartPresentation}
-                className="px-8 py-3.5 rounded-full bg-[#1DB954] hover:bg-[#1ed760] text-black font-extrabold text-sm md:text-base tracking-wider uppercase shadow-xl shadow-[#1DB954]/25 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-3"
+                className="px-6 sm:px-8 py-3.5 rounded-full bg-[#1DB954] hover:bg-[#1ed760] text-black font-extrabold text-sm md:text-base tracking-wider uppercase shadow-xl shadow-[#1DB954]/25 hover:scale-105 active:scale-95 transition-all inline-flex items-center gap-3"
               >
                 <Play className="w-5 h-5 fill-current" />
                 <span>MULAI PRESENTASI</span>
@@ -193,11 +224,11 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
           </div>
 
           {/* Right Column: Square Album Art & Audio Controls */}
-          <div className="col-span-5 flex flex-col items-center justify-center space-y-4">
+          <div className="col-span-12 lg:col-span-5 flex flex-col items-center justify-center space-y-4">
             {/* Square Album Cover Box */}
             <div className="relative group w-full max-w-[340px] aspect-square rounded-2xl overflow-hidden shadow-2xl border border-white/10 bg-[#181818]">
               <img
-                src="/src/assets/images/ghazali_farabi_manuscript_1794465711425.jpg"
+                src={heroImg}
                 alt="Konsep Terapi Samā‘iy Imam Al-Ghazali dan Imam Al-Farabi"
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 referrerPolicy="no-referrer"
@@ -308,7 +339,7 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
         </div>
 
         {/* Bottom subtle copyright note */}
-        <div className="flex items-center justify-between text-[11px] text-[#727272] border-t border-white/5 pt-3">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1 text-[11px] text-[#727272] border-t border-white/5 pt-3">
           <span><strong className="text-[#1DB954]">Spotsufy</strong> Special Edition © 2026 · Kelompok 8 Tasawuf Psikoterapi</span>
           <span className="text-white/50">Format Tayang Layar 16:9 Statis</span>
         </div>
