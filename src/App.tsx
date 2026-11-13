@@ -15,9 +15,7 @@ import { ReferencePage } from './components/ReferencePage';
 import { IntroSplashScreen } from './components/IntroSplashScreen';
 import spotsufyLogo from './assets/images/logo_spotsufy.png';
 import { 
-  Maximize, Minimize, BookOpen, Volume2, Music, Sparkles, Layers,
-  ChevronLeft, ChevronRight, Play, Pause, Info, HelpCircle, Home,
-  ChevronDown, ChevronUp, Users, Heart, Menu, X
+  BookOpen, Music, HelpCircle, Users, Menu, Heart
 } from 'lucide-react';
 
 // Tampilan desktop: kanvas presentasi 16:9. Di bawah ini: halaman scroll vertikal.
@@ -37,7 +35,7 @@ function useMediaQuery(query: string): boolean {
 
 export default function App() {
   const [hasCompletedIntro, setHasCompletedIntro] = useState<boolean>(false);
-  const [viewMode, setViewMode] = useState<'home' | 'presentation' | 'references'>('home');
+  const [viewMode, setViewMode] = useState<'home' | 'presentation' | 'references' | 'music'>('home');
   const [currentSlideIndex, setCurrentSlideIndex] = useState<number>(0);
   const [isPlayingAudio, setIsPlayingAudio] = useState<boolean>(false);
   const [activeAudioTrack, setActiveAudioTrack] = useState<AudioTrackType>('none');
@@ -91,12 +89,16 @@ export default function App() {
 
   const handleTogglePlayAudio = () => {
     if (isPlayingAudio) {
-      audioEngine.stop();
+      audioEngine.pause();
     } else {
-      const trackToPlay = currentSlide.recommendedAudio && currentSlide.recommendedAudio !== 'none'
-        ? currentSlide.recommendedAudio
-        : (activeAudioTrack !== 'none' ? activeAudioTrack : 'arabian_acoustic');
-      audioEngine.playTrack(trackToPlay);
+      if (audioEngine.getCurrentItem()) {
+        audioEngine.resume();
+      } else {
+        const trackToPlay = currentSlide?.recommendedAudio && currentSlide.recommendedAudio !== 'none'
+          ? currentSlide.recommendedAudio
+          : (activeAudioTrack !== 'none' ? activeAudioTrack : 'arabian_acoustic');
+        audioEngine.playTrack(trackToPlay);
+      }
     }
   };
 
@@ -257,8 +259,18 @@ export default function App() {
           onTogglePlayAudio={handleTogglePlayAudio}
           activeAudioTrack={activeAudioTrack}
           onSelectTrack={handlePlayTrack}
-          onOpenLiked={() => setViewMode('presentation')}
+          onOpenLiked={() => setViewMode('music')}
           onOpenReferences={() => setViewMode('references')}
+        />
+      ) : viewMode === 'music' ? (
+        <MusicLibraryPage
+          isPlayingAudio={isPlayingAudio}
+          activeAudioTrack={activeAudioTrack}
+          onSelectTrack={handlePlayTrack}
+          onGoHome={() => setViewMode('home')}
+          onStartPresentation={() => setViewMode('presentation')}
+          volume={volume}
+          onVolumeChange={handleVolumeChange}
         />
       ) : viewMode === 'references' ? (
         <ReferencePage
@@ -306,6 +318,15 @@ export default function App() {
               </span>
 
               <button
+                onClick={() => setViewMode('music')}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 text-xs font-semibold text-white/80 hover:text-white transition-colors border border-white/10"
+                title="Buka Koleksi Musik (Liked Songs)"
+              >
+                <Heart className="w-3.5 h-3.5 text-purple-400 fill-current" />
+                <span className="hidden sm:inline">Liked Songs</span>
+              </button>
+
+              <button
                 onClick={() => setIsRefModalOpen(true)}
                 className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/5 hover:bg-white/10 text-xs font-semibold text-white/80 hover:text-white transition-colors border border-white/10"
                 title="Buka Referensi Primer"
@@ -345,6 +366,7 @@ export default function App() {
                 isCollapsed={isSidebarCollapsed}
                 onToggleCollapse={() => setIsSidebarCollapsed(prev => !prev)}
                 onGoHome={() => setViewMode('home')}
+                onOpenMusicLibrary={() => setViewMode('music')}
               />
             )}
 
@@ -398,24 +420,7 @@ export default function App() {
                     isFullscreen={isFullscreen}
                   />
                 </div>
-
-                <div className="mx-auto w-full max-w-3xl mt-3 flex items-center justify-between gap-3">
-                  <button
-                    onClick={handlePrevSlide}
-                    disabled={currentSlideIndex === 0}
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold text-white disabled:opacity-30"
-                  >
-                    <ChevronLeft className="w-4 h-4" /> Sebelumnya
-                  </button>
-                  <button
-                    onClick={handleNextSlide}
-                    disabled={currentSlideIndex === SLIDES_DATA.length - 1}
-                    className="flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1DB954] text-black text-xs font-bold disabled:opacity-30"
-                  >
-                    Berikutnya <ChevronRight className="w-4 h-4" />
-                  </button>
-                </div>
-                <div className="h-2" />
+                <div className="h-4" />
               </main>
             )}
           </div>
@@ -435,6 +440,10 @@ export default function App() {
                   isCollapsed={false}
                   onToggleCollapse={() => setIsMobileNavOpen(false)}
                   onGoHome={() => setViewMode('home')}
+                  onOpenMusicLibrary={() => {
+                    setViewMode('music');
+                    setIsMobileNavOpen(false);
+                  }}
                   isDrawer
                 />
               </div>
@@ -467,6 +476,7 @@ export default function App() {
           isFullscreen={isFullscreen}
           onToggleFullscreen={handleToggleFullscreen}
           onHide={() => setIsPlayerBarVisible(false)}
+          onOpenMusicLibrary={() => setViewMode('music')}
         />
       )}
         </>

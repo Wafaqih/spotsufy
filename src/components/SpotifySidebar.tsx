@@ -1,6 +1,6 @@
 import React from 'react';
 import { 
-  ChevronLeft, ChevronRight, Volume2, BookOpen, Layers, X
+  ChevronLeft, ChevronRight, Volume2, BookOpen, Layers, X, Heart, Home
 } from 'lucide-react';
 import { SlideData } from '../types/presentation';
 import spotsufyLogo from '../assets/images/logo_spotsufy.png';
@@ -26,6 +26,7 @@ export const SpotifySidebar: React.FC<SpotifySidebarProps> = ({
   isCollapsed,
   onToggleCollapse,
   onGoHome,
+  onOpenMusicLibrary,
   isDrawer = false
 }) => {
   return (
@@ -77,6 +78,36 @@ export const SpotifySidebar: React.FC<SpotifySidebarProps> = ({
         >
           {isDrawer ? <X className="w-5 h-5" /> : isCollapsed ? <ChevronRight className="w-4 h-4" /> : <ChevronLeft className="w-4 h-4" />}
         </button>
+      </div>
+
+      {/* Quick Navigation: Beranda & Liked Songs */}
+      <div className="p-2 space-y-1 border-b border-white/5">
+        <button
+          onClick={onGoHome}
+          className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-[#B3B3B3] hover:text-white hover:bg-white/5 transition-colors ${isCollapsed ? 'justify-center px-1' : ''}`}
+          title="Beranda Spotsufy"
+        >
+          <Home className="w-4 h-4 shrink-0" />
+          {!isCollapsed && <span>Beranda</span>}
+        </button>
+
+        {onOpenMusicLibrary && (
+          <button
+            onClick={onOpenMusicLibrary}
+            className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-[#B3B3B3] hover:text-white hover:bg-white/5 transition-colors group ${isCollapsed ? 'justify-center px-1' : ''}`}
+            title="Buka Koleksi Musik (Liked Songs)"
+          >
+            <div className="w-5 h-5 rounded-md bg-gradient-to-br from-[#450af5] via-purple-600 to-[#00d2ff] flex items-center justify-center text-white shrink-0 group-hover:scale-105 transition-transform shadow">
+              <Heart className="w-3 h-3 fill-current" />
+            </div>
+            {!isCollapsed && (
+              <div className="flex-1 text-left min-w-0">
+                <span className="block text-white font-bold truncate">Liked Songs</span>
+                <span className="text-[10px] text-[#A7A7A7] block truncate">15 Audio Terapi</span>
+              </div>
+            )}
+          </button>
+        )}
       </div>
 
       {/* Playlist Header */}

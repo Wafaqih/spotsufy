@@ -1,5 +1,6 @@
 import React from 'react';
-import { Users, X, Award, Sparkles, BookOpen, GraduationCap } from 'lucide-react';
+import { X, Users, BookOpen, Play } from 'lucide-react';
+import spotsufyLogo from '../assets/images/logo_spotsufy.png';
 
 interface GroupInfoModalProps {
   isOpen: boolean;
@@ -7,146 +8,86 @@ interface GroupInfoModalProps {
   onStartPresentation?: () => void;
 }
 
-export const TEAM_MEMBERS = [
-  {
-    no: '1',
-    name: 'Muhammad Abdu Wafaqih',
-    nim: '1241040097',
-    role: 'Penyusun Materi'
-  },
-  {
-    no: '2',
-    name: 'Sopie Mahbubah',
-    nim: '1241040098',
-    role: 'Penyusun Materi'
-  },
-  {
-    no: '3',
-    name: 'Aura Alfitra Qoriah',
-    nim: '1241040097',
-    role: 'Penyusun Materi'
-  }
-];
-
 export const GroupInfoModal: React.FC<GroupInfoModalProps> = ({
   isOpen,
   onClose,
-  onStartPresentation
+  onStartPresentation,
 }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 select-none">
-      <div className="w-full max-w-lg bg-[#181818] border border-white/10 rounded-2xl p-6 shadow-2xl space-y-4 relative animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4 select-none">
+      <div className="w-full max-w-lg bg-[#181818] border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between border-b border-white/10 pb-3">
-          <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-full bg-[#1DB954]/20 border border-[#1DB954]/30 flex items-center justify-center text-[#1DB954]">
-              <Users className="w-4 h-4" />
+        <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-[#141414]">
+          <div className="flex items-center gap-3">
+            <div className="w-9 h-9 rounded-full overflow-hidden bg-black border border-white/10 shrink-0">
+              <img src={spotsufyLogo} alt="Spotsufy Logo" className="w-full h-full object-cover" />
             </div>
             <div>
-              <h3 className="text-sm font-bold text-white">Kelompok 8</h3>
-              <p className="text-[11px] text-[#A7A7A7]">Mata Kuliah: Tasawuf Psikoterapi</p>
+              <h3 className="text-base font-bold text-white leading-tight">Kelompok 8 · Tasawuf Psikoterapi</h3>
+              <p className="text-xs text-[#1DB954] font-medium">Tim Penyusun Materi Konsep Terapi Samā‘iy</p>
             </div>
           </div>
-          <button 
+          <button
             onClick={onClose}
-            className="text-white/50 hover:text-white p-1 rounded-md transition-colors"
-            title="Tutup"
+            className="p-1.5 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-colors"
+            aria-label="Tutup informasi kelompok"
           >
-            <X className="w-4 h-4" />
+            <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Content */}
-        <div className="space-y-4 text-xs text-[#B3B3B3]">
-          {/* Members Grid */}
-          <div className="space-y-2">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] uppercase font-bold text-[#1DB954] tracking-wider">
-                Anggota Tim Penyusun:
-              </span>
-              <span className="text-[10px] text-white/40">3 Mahasiswa</span>
+        {/* Body */}
+        <div className="p-6 space-y-5">
+          <div className="p-4 rounded-xl bg-black/40 border border-white/10 space-y-2">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#1DB954]">
+              <BookOpen className="w-4 h-4" />
+              <span>Fokus Kajian Presentasi</span>
             </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              {TEAM_MEMBERS.map((member) => (
-                <div 
-                  key={member.name}
-                  className="p-3 rounded-xl bg-black/60 border border-white/10 flex flex-col justify-between space-y-2 hover:border-[#1DB954]/50 transition-colors"
-                >
-                  <div className="flex items-center justify-between">
-                    <span className="w-6 h-6 rounded-full bg-[#1DB954]/20 text-[#1DB954] flex items-center justify-center font-bold text-xs">
-                      {member.no}
-                    </span>
-                    <GraduationCap className="w-3.5 h-3.5 text-white/30" />
-                  </div>
-                  <div>
-                    <h4 className="text-xs font-bold text-white leading-tight">
-                      {member.name}
-                    </h4>
-                    <span className="text-[11px] font-mono text-[#1DB954] font-semibold block mt-1">
-                      NIM {member.nim}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Academic Topic Abstract */}
-          <div className="p-3.5 rounded-xl bg-white/5 border border-white/5 space-y-2">
-            <p className="text-white font-medium leading-relaxed">
-              Karya presentasi interaktif ini membedah konsep <strong>Terapi Samā‘iy Imam Al-Ghazali</strong> dan <strong>Kajian Teori Musik Imam Al-Farabi</strong> berlandaskan teks primer <em>Iḥyā’ ‘Ulūm al-Dīn</em> dan <em>Kitāb al-Mūsīqā al-Kabīr</em> serta literatur akademik CMES (2019).
+            <p className="text-sm text-[#E5E7EB] leading-relaxed">
+              Kajian komparatif dan sintesis pemikiran <strong>Imam Abu Hamid Al-Ghazali</strong> (<em>Iḥyā’ ‘Ulūm al-Dīn</em>) dan <strong>Abu Nashr Al-Farabi</strong> (<em>Kitāb al-Mūsīqā al-Kabīr</em>) mengenai hubungan pendengaran, susunan musikal, keadaan kalbu, dan pembinaan jiwa.
             </p>
+          </div>
 
-            <div className="pt-2 border-t border-white/5 space-y-1">
-              <span className="text-[10px] uppercase font-bold text-[#1DB954] tracking-wider block">
-                Fokus Utama Pembahasan:
-              </span>
-              <ul className="space-y-1 list-disc pl-4 text-[11px] text-[#A7A7A7]">
-                <li>Slide 1: Pendengaran Menuju Jiwa (Pengantar & Latar Pemikiran Kedua Tokoh).</li>
-                <li>Slide 2: Definisi Samā‘, Qalb, Wajd, dan Alur Konseptual Pembinaan Jiwa.</li>
-                <li>Slide 3: Komparasi Al-Ghazali (Tasawuf) vs Al-Farabi (Ilmu & Teori Musik).</li>
-                <li>Slide 4: Hati sebagai Khazanah Rahasia & Pendengaran sebagai Pemantik (Qawādiḥ).</li>
-                <li>Slide 5: Konsep Munāsabah (Kesesuaian Fitriah Nada & Ruh) serta 4 Ranah Pengaruh.</li>
-                <li>Slide 6: Konsep Samā‘iy (Hubungan Pendengaran, Pengalaman Batin, dan Tindakan).</li>
-                <li>Slide 7: Tiga Tahapan Samā‘iy: Fahmun (Kognisi), Wajdun (Afeksi), & Harakātun (Konasi).</li>
-                <li>Slide 8: Definisi Terapi Samā‘iy dan Tujuan Pembentukan Akhlak Mulia.</li>
-                <li>Slide 9: Jiwa yang Sehat & Kepekaan Batin (Refleksi Angin, Bunga, & Seruling).</li>
-                <li>Slide 10: Empat Tingkatan Mustami‘ Berdasarkan Orientasi & Kesiapan Spiritual.</li>
-                <li>Slide 11: Tujuan & Arah Samā‘iy Al-Ghazali (Alat Penguji Hati, Gerak Batin, & Puncak Tauhid).</li>
-                <li>Slide 12: Pemikiran Al-Farabi: Musik sebagai Ilmu Terstruktur (Nada, Melodi, & Irama).</li>
-                <li>Slide 13: Musik dan Pengaruhnya terhadap Jiwa (Ketenteraman, Spiritualitas, & Psikosomatik).</li>
-                <li>Slide 14: Matriks Komparasi Al-Ghazali vs Al-Farabi (Tasawuf vs Sains Musik).</li>
-                <li>Slide 15: Titik Temu Al-Ghazali dan Al-Farabi (Tiga Landasan Konvergensi Pemikiran).</li>
-                <li>Slide 16: Alur Praktis Pembinaan Samā‘iy (Sintesis 5 Langkah Integrasi Menuju Akhlak).</li>
-              </ul>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-1">
+              <span className="text-xs font-semibold text-amber-300 block">Rujukan Utama Al-Ghazali</span>
+              <p className="text-xs text-[#D1D5DB] leading-relaxed">
+                Kitāb Ādāb al-Samā‘ wa al-Wajd: konsep Samā‘, Qalb, Wajd, Munāsabah, serta tingkatan Mustami‘.
+              </p>
+            </div>
+            <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 space-y-1">
+              <span className="text-xs font-semibold text-cyan-300 block">Rujukan Utama Al-Farabi</span>
+              <p className="text-xs text-[#D1D5DB] leading-relaxed">
+                Kitāb al-Mūsīqā al-Kabīr &amp; kajian Ro Hani &amp; Suryo Ediyono (CMES, 2019).
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* Footer Actions */}
-        <div className="flex items-center justify-between pt-2 border-t border-white/10">
-          <span className="text-[10px] text-[#727272]">
-            <strong className="text-[#1DB954]">Spotsufy</strong> Presentation Edition 2026
-          </span>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={onClose}
-              className="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors"
-            >
-              Tutup
-            </button>
-            {onStartPresentation && (
+          <div className="flex items-center justify-between pt-2 border-t border-white/10">
+            <div className="flex items-center gap-2 text-xs text-white/60">
+              <Users className="w-4 h-4 text-[#1DB954]" />
+              <span>16 Slide Presentasi · 15 Audio Kontemplasi</span>
+            </div>
+
+            {onStartPresentation ? (
               <button
                 onClick={() => {
                   onClose();
                   onStartPresentation();
                 }}
-                className="px-5 py-1.5 bg-[#1DB954] text-black font-bold text-xs rounded-full hover:scale-105 active:scale-95 transition-transform"
+                className="px-4 py-2 rounded-full bg-[#1DB954] hover:bg-[#1ed760] text-black text-xs font-extrabold inline-flex items-center gap-1.5 transition-colors"
               >
-                Mulai Slide
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>Mulai Presentasi</span>
+              </button>
+            ) : (
+              <button
+                onClick={onClose}
+                className="px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-xs font-bold transition-colors"
+              >
+                Tutup
               </button>
             )}
           </div>

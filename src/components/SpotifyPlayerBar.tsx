@@ -26,6 +26,7 @@ interface SpotifyPlayerBarProps {
   isFullscreen: boolean;
   onToggleFullscreen: () => void;
   onHide?: () => void;
+  onOpenMusicLibrary?: () => void;
 }
 
 export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
@@ -46,7 +47,8 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
   onOpenReferences,
   isFullscreen,
   onToggleFullscreen,
-  onHide
+  onHide,
+  onOpenMusicLibrary
 }) => {
   const [prevVolume, setPrevVolume] = useState<number>(0.75);
   const [audioTime, setAudioTime] = useState<number>(0);
@@ -78,12 +80,17 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
   };
 
   const trackInfo = getTrackDisplayName(activeAudioTrack);
+  const currentMusicItem = audioEngine.getCurrentItem();
 
   return (
     <footer className="min-h-16 lg:h-20 bg-[#141414] border-t border-white/10 px-3 md:px-6 pt-2 pb-[max(0.5rem,env(safe-area-inset-bottom))] lg:py-0 flex flex-wrap lg:flex-nowrap items-center justify-between gap-x-3 gap-y-1.5 select-none z-40 shrink-0">
       {/* Left: Current Slide Info & Album Icon */}
       <div className="flex items-center gap-2.5 flex-1 min-w-0 lg:flex-none lg:w-1/4 lg:min-w-[200px]">
-        <div className="relative w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-black border border-white/10 overflow-hidden flex items-center justify-center shrink-0 shadow-md">
+        <div 
+          onClick={onOpenMusicLibrary}
+          className={`relative w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-black border border-white/10 overflow-hidden flex items-center justify-center shrink-0 shadow-md ${onOpenMusicLibrary ? 'cursor-pointer hover:border-[#1DB954]/50' : ''}`}
+          title={onOpenMusicLibrary ? "Buka Koleksi Musik (Liked Songs)" : undefined}
+        >
           <div className="absolute inset-0 bg-gradient-to-tr from-[#1DB954]/25 to-black" />
           <Disc 
             className={`w-6 h-6 text-[#1DB954] relative z-10 ${isPlayingAudio ? 'animate-spin' : ''}`} 
@@ -94,14 +101,23 @@ export const SpotifyPlayerBar: React.FC<SpotifyPlayerBarProps> = ({
         <div className="min-w-0 pr-2">
           <div className="flex items-center gap-1.5">
             <span className="text-[10px] font-mono font-bold text-[#1DB954] bg-[#1DB954]/10 px-1.5 py-0.2 rounded border border-[#1DB954]/20 whitespace-nowrap shrink-0">
-              Slide {currentSlide.trackNumber}
+              {isPlayingAudio ? '▶ Sedang Memutar' : `Slide ${currentSlide.trackNumber}`}
             </span>
-            <h4 className="text-xs font-bold text-white truncate">
-              {currentSlide.title}
+            <h4 
+              onClick={onOpenMusicLibrary}
+              className={`text-xs font-bold text-white truncate ${onOpenMusicLibrary ? 'cursor-pointer hover:text-[#1DB954]' : ''}`}
+              title={currentMusicItem ? `${currentMusicItem.title} - ${currentMusicItem.artist}` : currentSlide.title}
+            >
+              {currentMusicItem ? currentMusicItem.title : currentSlide.title}
             </h4>
+            {currentMusicItem?.arabicTitle && (
+              <span dir="rtl" lang="ar" className="hidden sm:inline-block text-xs font-amiri text-amber-300 font-semibold px-1.5 py-0.5 rounded bg-amber-400/10 border border-amber-400/25 shrink-0">
+                {currentMusicItem.arabicTitle}
+              </span>
+            )}
           </div>
           <p className="text-[10px] text-[#A7A7A7] truncate mt-0.5">
-            {currentSlide.category} · {isPlayingAudio ? (trackInfo.hasRealAudio ? 'Audio Kontemplatif Aktif' : 'Musik Diputar') : 'Audio Hening'}
+            {currentMusicItem ? `${currentMusicItem.artist} · Slide ${currentSlide.trackNumber}` : `${currentSlide.category} · ${isPlayingAudio ? 'Audio Kontemplatif' : 'Hening'}`}
           </p>
         </div>
 

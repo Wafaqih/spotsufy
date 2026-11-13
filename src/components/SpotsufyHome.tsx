@@ -242,6 +242,16 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
 
             {/* Under-Album Audio Controls & Scrubber */}
             <div className="w-full max-w-[340px] space-y-2">
+              {/* Active Playing Track Title */}
+              <div className="text-center px-2 py-0.5 min-h-[36px] flex flex-col justify-center">
+                <p className="text-xs font-bold text-white truncate">
+                  {audioEngine.getCurrentItem()?.title || (isPlayingAudio ? 'Audio Kontemplatif Aktif' : 'Terapi Samā‘iy: Koleksi 15 Audio')}
+                </p>
+                <p className="text-[10px] text-[#1DB954] font-medium truncate">
+                  {audioEngine.getCurrentItem()?.artist || 'Imam Al-Farabi & Imam Al-Ghazali'}
+                </p>
+              </div>
+
               {/* Progress Slider */}
               <div className="flex items-center gap-2">
                 <span className="text-[10px] font-mono text-[#A7A7A7] w-8 text-right tabular-nums">
@@ -283,7 +293,10 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
               {/* Control Buttons Row */}
               <div className="flex items-center justify-center gap-5 pt-1">
                 <button 
-                  onClick={() => setIsShuffle(prev => !prev)}
+                  onClick={() => {
+                    const next = audioEngine.toggleShuffle();
+                    setIsShuffle(next);
+                  }}
                   className={`p-1.5 transition-colors ${
                     isShuffle ? 'text-[#1DB954]' : 'text-white/60 hover:text-white'
                   }`}
@@ -293,9 +306,9 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
                 </button>
 
                 <button 
-                  onClick={() => onSelectTrack('calm_acoustic')}
+                  onClick={() => audioEngine.prevTrack()}
                   className="p-1.5 text-white/80 hover:text-white transition-colors"
-                  title="Suasana Tenang"
+                  title="Lagu Sebelumnya"
                 >
                   <SkipBack className="w-5 h-5 fill-current" />
                 </button>
@@ -304,7 +317,7 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
                 <button
                   onClick={onTogglePlayAudio}
                   className="w-10 h-10 rounded-full bg-white hover:scale-105 active:scale-95 text-black flex items-center justify-center transition-all shadow-lg shadow-white/10"
-                  title={isPlayingAudio ? "Jeda Audio" : "Putar Audio Kontemplatif"}
+                  title={isPlayingAudio ? "Jeda Audio" : "Putar Audio"}
                 >
                   {isPlayingAudio ? (
                     <Pause className="w-5 h-5 fill-current" />
@@ -314,15 +327,18 @@ export const SpotsufyHome: React.FC<SpotsufyHomeProps> = ({
                 </button>
 
                 <button 
-                  onClick={() => onSelectTrack('arabian_acoustic')}
+                  onClick={() => audioEngine.nextTrack()}
                   className="p-1.5 text-white/80 hover:text-white transition-colors"
-                  title="Alunan Akustik Klasik"
+                  title="Lagu Berikutnya"
                 >
                   <SkipForward className="w-5 h-5 fill-current" />
                 </button>
 
                 <button 
-                  onClick={() => setIsRepeat(prev => !prev)}
+                  onClick={() => {
+                    const next = audioEngine.toggleRepeat();
+                    setIsRepeat(next);
+                  }}
                   className={`p-1.5 relative transition-colors ${
                     isRepeat ? 'text-[#1DB954]' : 'text-white/60 hover:text-white'
                   }`}

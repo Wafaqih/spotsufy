@@ -39,7 +39,12 @@ export type AudioTrackType =
   | 'maqam_ajam'
   | 'maqam_kurd'
   | 'maqam_iraqi'
-  | 'ambient_reflection';
+  | 'ambient_reflection'
+  | 'sufi_rumi_healing'
+  | 'song_beranjak_dewasa'
+  | 'song_everything_u_are'
+  | 'song_sorai'
+  | (string & {});
 
 export interface CustomSlideMedia {
   type: 'image' | 'pdf';

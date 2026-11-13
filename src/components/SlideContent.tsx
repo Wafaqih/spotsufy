@@ -729,7 +729,7 @@ export const SlideContent: React.FC<SlideContentProps> = ({
             >
               <div className="flex items-center justify-between border-b border-white/5 pb-1">
                 <span className="text-[10px] font-mono font-bold text-white/40">{cat.num}</span>
-                <span className={`text-xs font-arabic font-bold ${cat.color}`} dir="rtl" lang="ar">
+                <span className={`text-sm font-arabic font-bold ${cat.color} leading-normal`} dir="rtl" lang="ar">
                   {cat.arabicRef}
                 </span>
               </div>
